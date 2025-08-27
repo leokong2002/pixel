@@ -17,12 +17,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.pixel.repository.model.UserInfo
+import com.example.pixel.repository.model.FormattedUserInfo
 import com.example.pixel.ui.theme.PixelTheme
 
 @Composable
 fun UserInfoTile(
-    userInfo: UserInfo,
+    formattedUserInfo: FormattedUserInfo,
     onFollowClick: (Long) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -40,15 +40,15 @@ fun UserInfoTile(
             .clip(shape = RoundedCornerShape(size = 16.dp))
             .padding(all = 16.dp)
     ) {
-        ProfileImage(model = userInfo.imageUrl)
+        ProfileImage(model = formattedUserInfo.imageUrl)
         UserNameAndReputation(
-            totalReputation = userInfo.totalReputation,
-            displayName = userInfo.displayName,
+            totalReputation = formattedUserInfo.totalReputation,
+            displayName = formattedUserInfo.formattedDisplayName,
             modifier = Modifier.weight(1f)
         )
         FollowButton(
-            isFollowed = userInfo.isFollowed,
-            onFollowClick = { onFollowClick.invoke(userInfo.id) }
+            isFollowed = formattedUserInfo.isFollowed,
+            onFollowClick = { onFollowClick.invoke(formattedUserInfo.accountId) }
         )
     }
 }
@@ -86,15 +86,15 @@ private fun FollowButton(
 //region Previews
 @Preview(showBackground = true)
 @Composable
-fun UserInfoTilePreview() {
+private fun UserInfoTilePreview() {
     PixelTheme {
         UserInfoTile(
-            userInfo = UserInfo(
+            formattedUserInfo = FormattedUserInfo(
                 isFollowed = true,
-                id = 1234567,
+                accountId = 1234567,
                 totalReputation = 12345,
                 imageUrl = "https://www.example.com/image.jpg",
-                displayName = "User Name"
+                formattedDisplayName = "User Name"
             ),
             onFollowClick = {}
         )

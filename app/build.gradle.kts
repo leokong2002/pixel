@@ -62,7 +62,6 @@ dependencies {
     implementation(libs.coil.compose.network)
     implementation(libs.androidx.datastore)
     implementation(libs.lottie.compose)
-    implementation(libs.vico.compose.m3)
 
     implementation(libs.bundles.room)
     ksp(libs.androidx.room.compiler)
@@ -78,4 +77,11 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    testImplementation(kotlin("test"))
+
+    testImplementation(libs.coroutines.test)
+    testImplementation(libs.mockito)
+    testImplementation(libs.hilt.android.testing)
+    kspAndroidTest(libs.hilt.compiler)
+    testAnnotationProcessor(libs.hilt.compiler)
 }
