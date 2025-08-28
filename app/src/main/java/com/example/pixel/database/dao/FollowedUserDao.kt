@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.pixel.database.model.FollowedUser
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FollowedUserDao {

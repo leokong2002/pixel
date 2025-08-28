@@ -122,14 +122,17 @@ class UserListViewModelTest {
                 results.send(it)
             }
         }
+
         FakeStackOverflowRepository.emit(UserInfoListData(isLoading = false, hasError = true))
         FakeFollowedUserRepository.emit(FollowUsersData(isLoading = false))
 
         val result1 = results.receive()
         val result2 = results.receive()
+        assertEquals(true, result1.isLoading)
         assertEquals(emptyList<FormattedUserInfo>(), result1.formattedUserInfoList)
         assertEquals(emptyList<FormattedUserInfo>(), result2.formattedUserInfoList)
         assertEquals(0, result2.usersCount)
+        assertEquals(false, result2.isLoading)
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -143,14 +146,17 @@ class UserListViewModelTest {
                 results.send(it)
             }
         }
+
         FakeStackOverflowRepository.emit(userInfoListData)
         FakeFollowedUserRepository.emit(FollowUsersData(isLoading = false))
 
         val result1 = results.receive()
         val result2 = results.receive()
+        assertEquals(true, result1.isLoading)
         assertEquals(emptyList<FormattedUserInfo>(), result1.formattedUserInfoList)
         assertEquals(expectedListWithNoFollowedUsers, result2.formattedUserInfoList)
         assertEquals(3, result2.usersCount)
+        assertEquals(false, result2.isLoading)
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -164,14 +170,17 @@ class UserListViewModelTest {
                 results.send(it)
             }
         }
+
         FakeStackOverflowRepository.emit(userInfoListData)
         FakeFollowedUserRepository.emit(followUsersData)
 
         val result1 = results.receive()
         val result2 = results.receive()
+        assertEquals(true, result1.isLoading)
         assertEquals(emptyList<FormattedUserInfo>(), result1.formattedUserInfoList)
         assertEquals(expectedListWithFollowedUser, result2.formattedUserInfoList)
         assertEquals(3, result2.usersCount)
+        assertEquals(false, result2.isLoading)
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -185,13 +194,16 @@ class UserListViewModelTest {
                 results.send(it)
             }
         }
+
         FakeStackOverflowRepository.emit(UserInfoListData(isLoading = false, hasError = true))
         FakeFollowedUserRepository.emit(followUsersData)
 
         val result1 = results.receive()
         val result2 = results.receive()
+        assertEquals(true, result1.isLoading)
         assertEquals(emptyList<FormattedUserInfo>(), result1.formattedUserInfoList)
         assertEquals(emptyList<FormattedUserInfo>(), result2.formattedUserInfoList)
         assertEquals(0, result2.usersCount)
+        assertEquals(false, result2.isLoading)
     }
 }

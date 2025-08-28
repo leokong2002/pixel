@@ -42,7 +42,7 @@ class StackOverflowRepositoryImpl @Inject constructor(
                         throw IOException("Get Users - Failed to get users ${response.code}")
                     }
                     else -> {
-                        val userInfoList = gistJsonAdapter.fromJson(response.body!!.source())?.items.orEmpty()
+                        val userInfoList = gistJsonAdapter.fromJson(response.body.source())?.items.orEmpty()
                         if (userInfoList.isEmpty()) throw IOException("Get Users - Successful but received an empty list")
                         val formattedUserInfoList = userInfoList.map { userInfo ->
                             FormattedUserInfo(

@@ -17,7 +17,7 @@ object NetworkingModule {
     @Provides
     fun provideNetworkMonitor(
         @ApplicationContext appContext: Context
-    ): NetworkMonitor{
+    ): NetworkMonitor {
         return LiveNetworkMonitor(appContext)
     }
 

@@ -6,19 +6,17 @@ import okhttp3.Response
 import javax.inject.Inject
 
 class NetworkMonitorInterceptor @Inject constructor(
-    private val liveNetworkMonitor:NetworkMonitor
-): Interceptor {
-
+    private val liveNetworkMonitor: NetworkMonitor
+) : Interceptor {
 
     @Throws(NoNetworkException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val request: Request = chain.request()
 
-        if(liveNetworkMonitor.isConnected()){
+        if (liveNetworkMonitor.isConnected()) {
             return chain.proceed(request)
-        }else{
+        } else {
             throw NoNetworkException("Network Error")
         }
-
     }
 }
