@@ -3,13 +3,13 @@ package com.example.pixel.repository.model
 import com.example.pixel.database.model.FollowedUser
 import com.squareup.moshi.Json
 
-data class Items(val items: List<UserInfo>)
+data class Items(val items: List<UserInfo>?)
 
 data class UserInfo(
-    @Json(name = "account_id") val accountId: Long,
-    @Json(name = "reputation") val totalReputation: Long,
-    @Json(name = "profile_image") val imageUrl: String,
-    @Json(name = "display_name") val displayName: String,
+    @Json(name = "account_id") val accountId: Long?,
+    @Json(name = "reputation") val totalReputation: Long?,
+    @Json(name = "profile_image") val imageUrl: String?,
+    @Json(name = "display_name") val displayName: String?,
 )
 
 data class UserInfoListData(

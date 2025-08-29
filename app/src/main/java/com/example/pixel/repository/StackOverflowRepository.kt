@@ -46,10 +46,10 @@ class StackOverflowRepositoryImpl @Inject constructor(
                         if (userInfoList.isEmpty()) throw IOException("Get Users - Successful but received an empty list")
                         val formattedUserInfoList = userInfoList.map { userInfo ->
                             FormattedUserInfo(
-                                accountId = userInfo.accountId,
-                                totalReputation = userInfo.totalReputation,
-                                imageUrl = userInfo.imageUrl,
-                                formattedDisplayName = Html.fromHtml(userInfo.displayName, Html.FROM_HTML_MODE_LEGACY).toString(),
+                                accountId = userInfo.accountId ?: 0,
+                                totalReputation = userInfo.totalReputation ?: 0,
+                                imageUrl = userInfo.imageUrl.orEmpty(),
+                                formattedDisplayName = Html.fromHtml(userInfo.displayName.orEmpty(), Html.FROM_HTML_MODE_LEGACY).toString(),
                             )
                         }
                         userInfoListDataFlow.emit(
